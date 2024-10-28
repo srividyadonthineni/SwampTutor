@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState("");
-  const { isLoggedIn, login, logout } = useAuth();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log("Sending to login function:", username, password); // Debugging log
     try {
-      const response = await axios.post("http://localhost:5000/api/login", { email, password });
-      setMessage(response.data.message);
+      const successMessage = await login(username, password);
+      setMessage(successMessage);
     } catch (error) {
-      setMessage(error.response ? error.response.data.error : "An error occurred");
+      setMessage(error.message);
     }
   };
 
@@ -24,14 +24,14 @@ function LoginPage() {
         <h2 className="text-2xl font-bold text-center text-gray-700">Login</h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-600">
-              Email
+            <label htmlFor="username" className="block text-sm font-medium text-gray-600">
+              Username
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className="w-full px-4 py-2 mt-1 text-green-800 bg-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-green-300"
             />
@@ -50,7 +50,6 @@ function LoginPage() {
             />
           </div>
           <button
-            onClick={login}
             type="submit"
             className="w-full px-4 py-2 font-semibold text-green-800 bg-green-200 rounded hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-400"
           >

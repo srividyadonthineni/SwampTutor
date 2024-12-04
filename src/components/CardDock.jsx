@@ -2,7 +2,7 @@ import React from 'react'
 import Card from './Card'
 import {Link} from "react-router-dom"
 
-const CardDock = () => {
+const CardDock = ({user}) => {
   return (
     <section className = "py-4">
       <div className = "container-xl lg:container m-auto">
@@ -12,7 +12,7 @@ const CardDock = () => {
             <p className = "mt-2 mb-4">
               Search for available tutors for any subject
             </p>
-            <Link to = "/searchTutor" className = "inline-block rounded-md bg-green-800 text-white px-4 py-2 hover:bg-green-600">
+            <Link to = {user ? "/dashboard" : "/login"} className = "inline-block rounded-md bg-green-800 text-white px-4 py-2 hover:bg-green-600">
               Search
             </Link>
           </Card>
@@ -21,7 +21,7 @@ const CardDock = () => {
             <p className = "mt-2 mb-4">
               Create a listing for your service
             </p>
-            <Link to = "/createListing" className = "inline-block rounded-md bg-green-800 text-white px-4 py-2 hover:bg-green-600">
+            <Link to = {(user&&user.isTutor) ? "/createListing" : "/login"} className = "inline-block rounded-md bg-green-800 text-white px-4 py-2 hover:bg-green-600">
               Create
             </Link>
           </Card>

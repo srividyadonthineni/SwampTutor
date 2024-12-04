@@ -1,11 +1,11 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import CardDock from '../components/CardDock'
-const HomePage = () => {
+const HomePage = ({user}) => {
   return (
     <div>
         <Hero />
-        <CardDock />
+        <CardDock user={user} />
     </div>
   )
 }

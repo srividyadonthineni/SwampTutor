@@ -18,11 +18,8 @@ function LoginPage  ({ setUser })  {
       e.preventDefault();
   
       try {
-        const baseUrl = process.env.NODE_ENV === "production"
-        ? "https://your-production-domain.com"
-        : "http://localhost:5000";
       
-      const response = await axios.get(`${baseUrl}/login`, formData);
+      const response = await axios.post("http://localhost:5000/login", formData);
         setUser({ name: response.data.name, isTutor: response.data.is_tutor });
         localStorage.setItem("token", response.data.token); // Store the token for persistence
         navigate("/dashboard"); // Redirect to user homepage

@@ -4,12 +4,10 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
 dotenv.config();
+console.log("JWT Secret:", process.env.JWT_SECRET);
 const app = express();
 
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Enable JSON parsing for incoming requests
-
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // In-memory user data for testing
 const users = [
@@ -19,6 +17,9 @@ const users = [
     password: 'password123'
   }
 ];
+
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Enable JSON parsing for incoming requests
 
 // Login route
 app.post('/login', (req, res) => {
@@ -32,6 +33,30 @@ app.post('/login', (req, res) => {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
 });
+
+
+// Import bcrypt for password hashing
+const bcrypt = require('bcrypt');
+
+// Registration route
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+
+  // Check if username already exists
+  const userExists = users.find((u) => u.username === username);
+  if (userExists) {
+    return res.status(400).json({ error: 'Username already taken' });
+  }
+
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Save the new user
+  users.push({ id: users.length + 1, username, password: hashedPassword });
+
+  return res.status(201).json({ message: 'User registered successfully' });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

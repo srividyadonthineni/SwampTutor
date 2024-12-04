@@ -2,9 +2,6 @@
 import React, { useState } from "react";
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import CardDock from './components/CardDock';
 import Default from './layouts/Default';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -16,7 +13,7 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<Default user={user} setUser={setUser}/>}>
-        <Route index element={<HomePage user={user} setUser={setUser}/>} />
+        <Route index element={<HomePage user={user} />} />
         <Route path='/login' element={<LoginPage setUser={setUser} />} />
         <Route path='/register' element={<RegisterPage setUser={setUser} />} />
         <Route

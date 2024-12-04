@@ -1,7 +1,7 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import CardDock from '../components/CardDock'
-const HomePage = ({user, setUser}) => {
+const HomePage = ({user}) => {
   return (
     <div>
         <Hero />

@@ -4,10 +4,10 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import CardDock from '../components/CardDock'
 
-const Default = () => {
+const Default = ({user, setUser}) => {
   return (
     <>
-      <Navbar />
+      <Navbar user={user} setUser={setUser}/>
       <Outlet />
     </>
   )

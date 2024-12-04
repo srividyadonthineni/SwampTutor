@@ -1,11 +1,12 @@
+require('dotenv').config();
 const express = require('express');
-const jwt = import('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const bcrypt = import('bcrypt');
+const bcrypt = require('bcrypt');
 const app = express();
 app.use(cors());
 app.use(express.json());
-require('dotenv').config();
+
 
 app.listen(5000, () => console.log('Server running on http://localhost:5000'));
 

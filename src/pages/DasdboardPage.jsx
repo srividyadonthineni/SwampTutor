@@ -9,7 +9,11 @@ const DashboardPage = ({ user, setUser }) => {
     const fetchTutors = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/tutors", {
+        const baseUrl = process.env.NODE_ENV === "production"
+  ? "https://your-production-domain.com"
+  : "http://localhost:5000";
+
+const response = await axios.get("${baseUrl}/tutors", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

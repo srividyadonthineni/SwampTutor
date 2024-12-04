@@ -9,9 +9,38 @@ const RegisterPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    if (!formData.email.endsWith("@ufl.edu")) {
+      setMessage("Please use a @ufl.edu email address.");
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:5001/register', { username, password });
-      setMessage(response.data.message); // Display success message
+      const token = localStorage.getItem("token");
+        const baseUrl = process.env.NODE_ENV === "production"
+        ? "https://your-production-domain.com"
+        : "http://localhost:5000";
+
+        const response = await axios.get("${baseUrl}/register", {
+        ...formData,
+        coursesTaken,
+        coursesTutoring,
+      });
+
+      if (response.data.success) {
+        // Save the token to local storage
+        localStorage.setItem("token", response.data.token);
+
+        // Set user state
+        setUser({
+          name: response.data.name,
+          isTutor: response.data.isTutor,
+        });
+
+        // Redirect to the dashboard
+        navigate("/");
+      } else {
+        setMessage("Registration failed.");
+      }
     } catch (error) {
       setMessage(error.response?.data?.error || 'Registration failed'); // Display error message
     }

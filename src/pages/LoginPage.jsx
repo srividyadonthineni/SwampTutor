@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { NavLink } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState("");
-  const { login } = useAuth();
+function LoginPage  ({ setUser })  {
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [message, setMessage] = useState("");
+    const navigate = useNavigate();
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const token = localStorage.getItem("token");
+        const baseUrl = process.env.NODE_ENV === "production"
+        ? "https://your-production-domain.com"
+        : "http://localhost:5000";
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log("Sending to login function:", username, password); // Debugging log
-    try {
-      const successMessage = await login(username, password);
-      setMessage(successMessage);
-    } catch (error) {
-      setMessage(error.message);
-    }
-  };
-
+        const response = await axios.get("${baseUrl}/login", formData);
+        setUser({ name: response.data.name, isTutor: response.data.is_tutor });
+        localStorage.setItem("token", response.data.token); // Store the token for persistence
+        navigate("/dashboard"); // Redirect to user homepage
+      } catch (error) {
+        setMessage("Login failed: " + (error.response?.data?.error || error.message));
+      }
+    };
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-4 bg-white rounded shadow-lg">

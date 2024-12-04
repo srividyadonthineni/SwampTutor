@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = import('sqlite3').verbose();
 
 // Connect to the SQLite database
 const db = new sqlite3.Database('./database.db', (err) => {

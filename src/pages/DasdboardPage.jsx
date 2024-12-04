@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const DashboardPage = ({ user, setUser }) => {
+const DashboardPage = ({ user }) => {
   const [tutors, setTutors] = useState([]);
 
   // Fetch available tutors
@@ -13,7 +13,7 @@ const DashboardPage = ({ user, setUser }) => {
   ? "https://your-production-domain.com"
   : "http://localhost:5000";
 
-const response = await axios.get("${baseUrl}/tutors", {
+const response = await axios.get(`${baseUrl}/tutors`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

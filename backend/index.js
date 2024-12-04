@@ -1,11 +1,11 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const bcrypt = require('bcrypt');
+const express = import('express');
+const jwt = import('jsonwebtoken');
+const cors = import('cors');
+const bcrypt = import('bcrypt');
 const app = express();
 app.use(cors());
 app.use(express.json());
-require('dotenv').config();
+import('dotenv').config();
 
 app.listen(5000, () => console.log('Server running on http://localhost:5000'));
 
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Backend Server is Running!');
 });
 
-const db = require('./db');
+const db = import('./db');
 
 
 // Middleware to authenticate requests

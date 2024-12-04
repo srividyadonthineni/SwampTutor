@@ -21,7 +21,7 @@ const App = () => {
         <Route path='/register' element={<RegisterPage setUser={setUser} />} />
         <Route
           path='/dashboard'
-          element={user ? <DashboardPage user={user} setUser={setUser} /> : <HomePage />}
+          element={user ? <DashboardPage user={user}/> : <HomePage />}
         />
       </Route>
     )

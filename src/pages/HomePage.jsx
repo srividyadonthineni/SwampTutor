@@ -5,7 +5,7 @@ const HomePage = ({user, setUser}) => {
   return (
     <div>
         <Hero />
-        <CardDock user={user} setUser={setUser}/>
+        <CardDock user={user} />
     </div>
   )
 }

@@ -58,7 +58,7 @@ const Register = ({ setUser }) => {
       ? "https://your-production-domain.com"
       : "http://localhost:5000";
     
-    const response = await axios.get("${baseUrl}/register", {
+    const response = await axios.get(`${baseUrl}/register`, {
         ...formData,
         coursesTaken,
         coursesTutoring,

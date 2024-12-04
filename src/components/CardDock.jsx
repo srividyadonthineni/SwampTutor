@@ -3,7 +3,7 @@ import Card from './Card'
 import {Link} from "react-router-dom"
 import { useAuth } from '../context/AuthContext';
 
-const CardDock = ({user, setUser}) => {
+const CardDock = ({user}) => {
   return (
     <section className = "py-4">
       <div className = "container-xl lg:container m-auto">

@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DasdboardPage';
+import SettingsPage from './pages/SettingsPage';
 
 const App = () => {
   const [user, setUser] = useState(null); // Manage logged-in user state
@@ -19,6 +20,10 @@ const App = () => {
         <Route
           path='/dashboard'
           element={user ? <DashboardPage user={user}/> : <HomePage />}
+        />
+                <Route
+          path='/settings'
+          element={user ? <SettingsPage user={user}/> : <HomePage />}
         />
       </Route>
     )

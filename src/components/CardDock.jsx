@@ -21,7 +21,7 @@ const CardDock = ({user}) => {
             <p className = "mt-2 mb-4">
               Create a listing for your service
             </p>
-            <Link to = {(user&&user.isTutor) ? "/createListing" : "/login"} className = "inline-block rounded-md bg-green-800 text-white px-4 py-2 hover:bg-green-600">
+            <Link to = {(user&&user.isTutor) ? "/settings" : "/login"} className = "inline-block rounded-md bg-green-800 text-white px-4 py-2 hover:bg-green-600">
               Create
             </Link>
           </Card>

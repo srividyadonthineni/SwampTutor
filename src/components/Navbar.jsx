@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
+import PopupMenu from './PopupMenu';
 
 const Navbar = ({user, setUser}) => {
   const navigate = useNavigate();
@@ -19,9 +20,7 @@ const Navbar = ({user, setUser}) => {
         <NavLink to="/">
           <span className="text-green-800 hover:text-green-600 font-medium">Home</span>
         </NavLink>
-        <NavLink to="/about">
-          <span className="text-green-800 hover:text-green-600 font-medium">About</span>
-        </NavLink>
+        <PopupMenu/>
       </div>
       <div className="flex gap-6">
       {user ? (
